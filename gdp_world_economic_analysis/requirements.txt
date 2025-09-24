@@ -1,0 +1,37 @@
+ipython
+jupyterlab
+kagglehub
+matplotlib
+mkdocs
+notebook
+numpy
+pandas
+pip
+pytest
+python-dotenv
+ruff
+scikit-learn
+# Additional libraries for economic analysis
+plotly
+seaborn
+streamlit
+dash
+bokeh
+folium
+geopandas
+statsmodels
+prophet
+pmdarima
+yfinance
+country-converter
+worldbank
+# For time series analysis
+arch
+scipy
+# For machine learning
+xgboost
+lightgbm
+# For data processing
+openpyxl
+xlsxwriter
+-e .
