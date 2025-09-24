@@ -144,9 +144,9 @@ streamlit run streamlit_app.py
 
 ## 📞 Contacto
 
-- **GitHub:** [@kevin](https://github.com/kevin)
+- **GitHub:** [@KevinVargas77](https://github.com/KevinVargas77)
 - **LinkedIn:** [Kevin Vargas](https://linkedin.com/in/kevin-vargas)
-- **Email:** kevin@example.com
+- **Email:** kevinvargas00@gmail.com
 
 ---
 
