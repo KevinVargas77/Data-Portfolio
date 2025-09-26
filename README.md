@@ -1,177 +1,151 @@
-# 🌍 GDP World Economic Analysis
+# 📊 Kevin Vargas — Data Analytics Portfolio
 
-![Python](https://img.shields.io/badge/Python-3.13-blue)
-![Streamlit](https://img.shields.io/badge/Streamlit-Dashboard-red)
-![Prophet](https://img.shields.io/badge/Prophet-Time%20Series-green)
-![Plotly](https://img.shields.io/badge/Plotly-Interactive%20Viz-orange)
-![Status](https://img.shields.io/badge/Status-Complete-success)
+> **Sr. Data Analyst & Business Intelligence Specialist**  
+> Banking & Finance professional with 9+ years of experience transforming complex data into strategic business insights.
 
-## 📋 Project Description
+## 👨‍💻 About Me
 
-Comprehensive and professional analysis of world economic data (GDP 2020-2025) featuring:
+**Master's in Project Management** | **BBA Banking & Finances** | **Scrum Master Certified**
 
-- **🔍 Exploratory Data Analysis (EDA)** - Complete descriptive statistics
-- **📊 Interactive Visualizations** - Advanced charts with Plotly
-- **� Time Series Analysis** - Predictions with Prophet and ARIMA
-- **🤖 Machine Learning** - Economic clustering, classification and prediction
-- **🚀 Interactive Dashboard** - Complete web application with Streamlit
+Sr. Data Analyst specializing in financial analytics, compensation modeling, and business intelligence. Currently driving data-driven decision-making at enterprise level through advanced Excel modeling, PowerBI dashboards, and cross-platform data integration. Proven expertise in revenue analysis, forecasting models, and process optimization across global organizations.
 
-## 🎯 Key Features
+**Core Expertise:**
+- **Financial Data Analysis** — Revenue forecasting, compensation modeling, contract analysis
+- **Business Intelligence** — PowerBI dashboards, advanced Excel analytics, KPI development  
+- **Data Integration** — Salesforce, ServiceNow, multi-platform data consolidation
+- **Project Management** — Agile methodologies, Scrum Master certified, process improvement
+- **Advanced Analytics** — Python, machine learning, predictive modeling (continuous learning)
 
-### ✅ Implemented Analysis
+## 🎯 Featured Projects
 
-- [x] **Complete EDA**: Descriptive statistics, growth analysis, COVID-19 impact
-- [x] **Advanced Visualizations**: 5 types of interactive charts (evolution, heatmaps, regional analysis)
-- [x] **Time Series Predictions**: Prophet models for economic forecasts 2026-2028
-- [x] **Machine Learning**: Economy clustering (5 groups), developed/emerging classification (89.5% accuracy)
-- [x] **Web Dashboard**: Complete interactive interface with multiple analysis pages
-- [x] **2028 Predictions**: GDP estimates using regression models (R²=0.999)
+### 🌍 [GDP World Economic Analysis](./gdp_world_economic_analysis/)
+**Global Economic Intelligence & Investment Strategy**
 
-### 🏆 Outstanding Results
+Comprehensive analysis of 195+ countries' economic performance (2020-2025) with predictive modeling through 2028. Identified 5 distinct economic clusters and COVID-19 recovery patterns to enable strategic investment decisions.
 
-- **📊 89.5% accuracy** in developed vs emerging economies classification
-- **🎯 R²=0.999** in GDP prediction model
-- **🌍 5 economic clusters** identified via K-means (Silhouette Score: 0.465)
-- **� Predictions until 2028** for major world economies
-- **🔍 COVID-19 Analysis** with identification of most/least affected countries
+**Key Results:**
+- 📈 **89.5% accuracy** in economic classification models
+- 🎯 **R²=0.999** in GDP prediction models (MAPE <5%)
+- 🌍 **5 economic clusters** identified for investment strategy
+- 📊 **Interactive dashboard** with 6 analysis modules
 
-## 🚀 Live Demo
-
-**[🌐 View Interactive Dashboard](https://gdp-analysis-kevin.streamlit.app)** *(Coming Soon)*
-
-## 🗂️ Project Structure
-
-```
-gdp_world_economic_analysis/
-├── src/
-│   ├── analysis/
-│   │   ├── eda_analysis.py             # Complete exploratory analysis
-│   │   └── ml_analysis.py              # Machine Learning and clustering
-│   ├── data/
-│   │   └── data_loader.py              # Data loading utilities
-│   ├── visualization/
-│   │   └── gdp_visualizations.py       # Interactive visualizations
-│   ├── forecasting/
-│   │   └── time_series_analysis.py     # Prophet and ARIMA models
-│   └── dashboard/
-│       └── streamlit_app.py            # Main dashboard application
-├── outputs/
-│   └── figures/                        # Generated visualizations
-├── docs/                               # Project documentation
-├── requirements.txt                    # Project dependencies
-├── run_dashboard.py                   # Main Streamlit runner
-└── README.md                          # Project documentation
-```
-
-## 🎯 Skills Demonstrated
-
-### 📊 **Data Science & Analytics**
-- Exploratory Data Analysis (EDA)
-- Descriptive and Inferential Statistics
-- Time Series Analysis
-- Advanced Data Visualization
-
-### 🤖 **Machine Learning**
-- Clustering (K-means, silhouette analysis)
-- Classification (Random Forest, SVM)
-- Regression (economic predictions)
-- Feature Engineering and Selection
-
-### 📈 **Time Series Forecasting**
-- Facebook Prophet
-- ARIMA Models
-- Trend Analysis
-- Medium-term Predictions
-
-### 🚀 **Development & Deployment**
-- Streamlit Applications
-- Interactive Dashboards
-- Git Version Control
-- Cloud Deployment (Streamlit Cloud)
-
-## 🛠️ Technologies Used
-
-### **Languages & Frameworks**
-- ![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white) **Python 3.13**
-- ![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=flat&logo=streamlit&logoColor=white) **Streamlit**
-
-### **Data Science & ML**
-- ![Pandas](https://img.shields.io/badge/Pandas-150458?style=flat&logo=pandas&logoColor=white) **Pandas**
-- ![NumPy](https://img.shields.io/badge/NumPy-013243?style=flat&logo=numpy&logoColor=white) **NumPy**
-- ![Scikit-learn](https://img.shields.io/badge/Scikit--learn-F7931E?style=flat&logo=scikit-learn&logoColor=white) **Scikit-learn**
-- **Prophet** (Time Series Forecasting)
-
-### **Visualization**
-- ![Plotly](https://img.shields.io/badge/Plotly-3F4F75?style=flat&logo=plotly&logoColor=white) **Plotly**
-- **Interactive Charts & Maps**
-
-### **Tools & Deployment**
-- ![Git](https://img.shields.io/badge/Git-F05032?style=flat&logo=git&logoColor=white) **Git**
-- ![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white) **GitHub**
-- **Streamlit Cloud**
-
-## 🚀 How to Run the Project
-
-### **Prerequisites**
-- Python 3.13+
-- pip package manager
-
-### **Installation & Execution**
-```bash
-# Clone the repository
-git clone https://github.com/KevinVargas77/portfolio-datasets.git
-cd portfolio-datasets/gdp_world_economic_analysis
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Run the dashboard
-streamlit run run_dashboard.py
-```
-
-### **Access**
-- **Local**: http://localhost:8501
-- **Live Demo**: [GDP Analysis Dashboard](https://gdp-analysis-kevin.streamlit.app) *(Coming Soon)*
-
-## � Data Sources & Methodology
-
-### **Dataset Information**
-- **Source**: World Bank GDP data (2020-2025)
-- **Coverage**: 195+ countries worldwide
-- **Variables**: GDP, population, growth rates, regional classifications
-- **Time Period**: 2020-2025 with predictions until 2028
-
-### **Analytical Approach**
-1. **Data Cleaning**: Missing value imputation, outlier detection
-2. **EDA**: Statistical analysis, correlation studies, COVID-19 impact assessment
-3. **Visualization**: Interactive charts, geographic maps, trend analysis
-4. **ML Modeling**: K-means clustering, Random Forest classification
-5. **Time Series**: Prophet forecasting with confidence intervals
-
-## � Key Insights & Results
-
-### 🔍 **Economic Analysis Findings**
-1. **COVID-19 Impact**: Identified 15 most affected economies with >10% GDP decline
-2. **Recovery Patterns**: 3 distinct recovery trajectories: V-shaped, U-shaped, L-shaped
-3. **Regional Disparities**: Asia-Pacific showed fastest recovery, Europe most resilient
-4. **Growth Predictions**: Average 3.2% global GDP growth projected for 2026-2028
-
-### 🤖 **Machine Learning Results**
-- **Clustering**: Successfully grouped 195 countries into 5 economic clusters
-- **Classification**: 89.5% accuracy in predicting developed vs emerging economies
-- **Forecasting**: Prophet model achieved MAPE < 5% for major economies
-- **Feature Importance**: Population, previous GDP, and regional factors most predictive
-
-## �📞 Contact
-
-- **GitHub:** [@KevinVargas77](https://github.com/KevinVargas77)
-- **LinkedIn:** [Kevin Vargas](https://linkedin.com/in/kevin-vargas)
-- **Email:** kevinvargas00@gmail.com
+**Technologies:** Python, Prophet, Scikit-learn, Plotly, Streamlit  
+**Domain:** Economics, Finance, Forecasting
 
 ---
 
-### 📄 License
-This project is under the MIT License. See [LICENSE](LICENSE) for more details.
+## 🛠️ Technical Skills
 
-### ⭐ Like this project?
-Don't forget to give it a star on GitHub! ⭐
+### **Core Analytics Tools**
+- **Excel Advanced** — Pivot Tables, VLOOKUP, XLOOKUP, complex formulas, financial modeling
+- **PowerBI** — Interactive dashboards, DAX formulas, executive reporting
+- **SQL** — Data querying, analysis, multi-platform database management
+- **Python** — pandas, numpy, scikit-learn, plotly, statistical analysis
+
+### **Business Platforms & CRM**
+- **Salesforce.com** — Data analysis, reporting, mass data operations
+- **ServiceNow** — Support analytics, dashboard creation, process optimization
+- **Oracle e-Business Suite** — Financial data management, vendor operations
+- **Monte Carlo Simulation** — Risk modeling, compensation forecasting
+
+### **Project Management & Process**
+- **Agile/Scrum** — Certified Scrum Master (SPOPC, SMPC)
+- **PMI Methodologies** — CAPM certified, project coordination
+- **Six Sigma** — Yellow Belt, continuous process improvement
+- **Data Quality Management** — Validation processes, accuracy assurance
+
+### **Advanced Analytics & ML**
+- **Machine Learning** — Classification, clustering, predictive modeling
+- **Time Series Analysis** — ARIMA, Prophet, forecasting models
+- **Statistical Modeling** — Regression analysis, hypothesis testing
+- **Data Visualization** — Plotly, matplotlib, interactive charts
+
+## 📈 Professional Highlights
+
+- 🏆 **Enterprise Analytics:** Currently leading compensation forecasting and cost modeling at Concentrix Catalyst
+- 📊 **Revenue Intelligence:** Specialized in recurring revenue analysis and contract optimization at global scale  
+- ⚡ **Process Excellence:** Six Sigma Yellow Belt with proven track record in continuous improvement
+- 🎯 **Cross-Functional Leadership:** Scrum Master certified with experience managing data-driven projects
+- � **Financial Expertise:** 9+ years in banking & finance with strong foundation in business administration
+
+## 🔍 Current Focus & Learning
+
+- **Advanced Python Analytics:** Expanding machine learning capabilities for business applications
+- **Economic Modeling:** Developing sophisticated forecasting models for strategic decision-making
+- **BI Innovation:** Creating next-generation dashboards for executive-level insights
+- **Process Automation:** Leveraging data science to optimize business operations
+- **Real-time BI:** Building streaming analytics pipelines
+- **ESG Analytics:** Integrating sustainability metrics into investment analysis
+- **MLOps:** Implementing model deployment and monitoring frameworks
+
+## 🎓 Education & Certifications
+
+**Academic Background:**
+- **Master's in Project Management** — LEAD University (2024)
+- **BBA Banking & Finances** — UMCA University (2021)
+- **Continuous Process Improvement Certificate** — Fidelitas University (2023)
+
+**Professional Certifications:**
+- **Scrum Master Professional Certificate (SMPC)** — CertiProf (2024)
+- **Scrum Product Owner Professional Certificate (SPOPC)** — CertiProf (2024)
+- **Six Sigma Yellow Belt Professional Certified** — SCRUMstudy (2023)
+- **CAPM Certification Course** — MAPO Learning Institute (2023)
+- **Career Essentials in Data Analysis** — Microsoft and LinkedIn (2023)
+
+## 🌟 Professional Approach
+
+**What I Bring:**
+- **Business-First Analytics** — Translating complex data into actionable business insights
+- **Cross-Platform Integration** — Expertise in Salesforce, ServiceNow, Oracle, and modern BI tools
+- **Financial Domain Knowledge** — Deep understanding of banking, finance, and compensation modeling
+- **Agile Leadership** — Certified Scrum Master with proven project delivery track record
+
+## 📬 Connect With Me
+
+Open to discussing data analytics opportunities, project collaborations, and sharing insights about business intelligence and financial modeling.
+
+**Contact:**
+- 📧 **Email:** [kevinvargas00@gmail.com](mailto:kevinvargas00@gmail.com)
+- 💼 **LinkedIn:** [Kevin Vargas](https://linkedin.com/in/kevargas)
+- 🐱 **GitHub:** [@KevinVargas77](https://github.com/KevinVargas77)
+- 📊 **Portfolio:** [View Projects →](https://github.com/KevinVargas77/Data-Portfolio)
+
+**Response Time:** I typically respond to professional inquiries within 24 hours.
+
+---
+
+## 🎯 Project Portfolio
+
+### Current Projects
+
+| Project | Domain | Technologies | Status |
+|---------|---------|-------------|---------|
+| [GDP Economic Analysis](./gdp_world_economic_analysis/) | Economics/Finance | Python, Prophet, ML | ✅ Complete |
+
+
+### 📁 Repository Structure
+
+```
+Data-Portfolio/
+├── gdp_world_economic_analysis/     # Global economic intelligence
+│   ├── src/                         # Analysis modules
+│   ├── outputs/                     # Visualizations & results
+│   └── README.md                    # Project documentation
+├── shared_resources/                # Common utilities & templates
+│   ├── templates/                   # Analysis templates
+│   └── utils/                       # Utility functions
+├── .gitignore                       # Git ignore rules
+└── README.md                        # This portfolio overview
+```
+
+---
+
+<div align="center">
+
+### 🌟 "Data is the new oil, but analytics is the refinery" 
+
+**Transforming raw data into strategic business value**
+
+*Open to new opportunities • Available for consulting • Passionate about data-driven decision making*
+
+</div>

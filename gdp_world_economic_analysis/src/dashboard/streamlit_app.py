@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-GDP World Economic Analysis - Interactive Dashboard
+GDst.set_page_config(
+    page_title="GDP Analysis | Kevin Vargas",
+    page_icon="G",
+    layout="wide",rld Economic Analysis - Interactive Dashboard
 ===================================================
 
 Dashboard interactivo completo que integra todos los análisis realizados:
@@ -32,7 +35,7 @@ PALETTE_QUAL20 = [
 # Configurar página - Optimizado
 st.set_page_config(
     page_title="GDP Analysis | Kevin Vargas",
-    page_icon="📊",
+    page_icon="�",
     layout="wide",
     initial_sidebar_state="expanded",
     menu_items={
@@ -254,6 +257,13 @@ def main():
         )
         st.plotly_chart(fig_global, use_container_width=True)
         
+        # Professional insight for Executive Summary
+        st.info("""
+        **Key Insight:** Global GDP shows resilient growth trajectory with notable 2020 disruption followed by strong recovery. 
+        The compound annual growth rate demonstrates the world economy's capacity to adapt and expand despite external shocks. 
+        This trend analysis serves as the foundation for strategic economic planning and investment allocation decisions.
+        """)
+        
     elif page == "Major Economies":
         st.header("Major Economies Analysis")
         
@@ -263,6 +273,13 @@ def main():
         # Gráfico de evolución
         fig_evolution = create_top_economies_chart(df, years, top_n)
         st.plotly_chart(fig_evolution, use_container_width=True)
+        
+        # Professional insight for Major Economies Evolution
+        st.info("""
+        **Strategic Analysis:** This evolution chart reveals competitive positioning among global economic leaders. 
+        Note the convergence patterns where emerging economies (India, China) show steeper growth trajectories compared to 
+        mature economies (US, Germany). The gap dynamics inform market entry strategies and economic partnership opportunities.
+        """)
         
         # Análisis de crecimiento
         st.subheader("**Growth Analysis**")
@@ -295,6 +312,13 @@ def main():
         if covid_fig is not None:
             st.plotly_chart(covid_fig, use_container_width=True)
             
+            # Professional insight for COVID Impact
+            st.warning("""
+            **Risk Management Insight:** COVID-19 impact analysis reveals distinct recovery patterns across economies. 
+            Countries with diversified economic structures and strong fiscal responses demonstrated greater resilience. 
+            This divergence creates both investment opportunities in recovering markets and risk considerations for portfolio allocation.
+            """)
+            
             col1, col2 = st.columns(2)
             
             with col1:
@@ -314,6 +338,13 @@ def main():
         
         regional_fig, regional_data = create_regional_analysis(df, years)
         st.plotly_chart(regional_fig, use_container_width=True)
+        
+        # Professional insight for Regional Analysis
+        st.success("""
+        **Geographic Strategy:** Regional GDP distribution reveals concentration patterns and growth opportunities. 
+        Asia's dominant share reflects demographic dividends and industrial capacity, while emerging regions show 
+        untapped potential for market expansion. This analysis guides regional investment allocation and market prioritization.
+        """)
         
         st.subheader("**GDP by Region**")
         regional_df = pd.DataFrame(list(regional_data.items()), 
@@ -366,6 +397,13 @@ def main():
             )
             
             st.plotly_chart(fig_custom, use_container_width=True)
+            
+            # Professional insight for Custom Comparisons
+            st.info("""
+            **Comparative Intelligence:** Custom country comparisons enable peer benchmarking and competitive analysis. 
+            Track relative performance, identify growth convergence/divergence patterns, and assess market positioning dynamics. 
+            This flexible analysis supports scenario planning and strategic country-specific investment decisions.
+            """)
             
             # Tabla de comparación
             st.subheader("**Comparison Table**")
@@ -452,6 +490,13 @@ def main():
         
         fig_pred.update_layout(height=600)
         st.plotly_chart(fig_pred, use_container_width=True)
+        
+        # Professional insight for Forecasting
+        st.success("""
+        **Predictive Intelligence:** GDP forecasting combines time series analysis with economic fundamentals to project 2028 scenarios. 
+        These projections support strategic planning, market sizing, and investment horizon decisions. Note the emerging economies' 
+        accelerated growth trajectories compared to mature markets, indicating shifting global economic dynamics.
+        """)
         
         # Predictions table
         st.subheader("**Detailed Projections**")
