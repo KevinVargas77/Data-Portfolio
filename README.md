@@ -1,13 +1,13 @@
-# 📊 Kevin Vargas — Data Analytics Portfolio
+# Kevin Vargas — Data Analytics Portfolio
 
-> **Sr. Data Analyst & Business Intelligence Specialist**  
+> **Data Analyst & Business Intelligence Specialist**  
 > Banking & Finance professional with 9+ years of experience transforming complex data into strategic business insights.
 
-## 👨‍💻 About Me
+## About Me
 
 **Master's in Project Management** | **BBA Banking & Finances** | **Scrum Master Certified**
 
-Sr. Data Analyst specializing in financial analytics, compensation modeling, and business intelligence. Currently driving data-driven decision-making at enterprise level through advanced Excel modeling, PowerBI dashboards, and cross-platform data integration. Proven expertise in revenue analysis, forecasting models, and process optimization across global organizations.
+Data Analyst specializing in financial analytics, compensation modeling, and business intelligence. Currently driving data-driven decision-making at enterprise level through advanced Excel modeling, PowerBI dashboards, and cross-platform data integration. Proven expertise in revenue analysis, forecasting models, and process optimization across global organizations.
 
 **Core Expertise:**
 - **Financial Data Analysis** — Revenue forecasting, compensation modeling, contract analysis
@@ -16,25 +16,25 @@ Sr. Data Analyst specializing in financial analytics, compensation modeling, and
 - **Project Management** — Agile methodologies, Scrum Master certified, process improvement
 - **Advanced Analytics** — Python, machine learning, predictive modeling (continuous learning)
 
-## 🎯 Featured Projects
+## Featured Projects
 
-### 🌍 [GDP World Economic Analysis](./gdp_world_economic_analysis/)
+### [GDP World Economic Analysis](./gdp_world_economic_analysis/)
 **Global Economic Intelligence & Investment Strategy**
 
 Comprehensive analysis of 195+ countries' economic performance (2020-2025) with predictive modeling through 2028. Identified 5 distinct economic clusters and COVID-19 recovery patterns to enable strategic investment decisions.
 
 **Key Results:**
-- 📈 **89.5% accuracy** in economic classification models
-- 🎯 **R²=0.999** in GDP prediction models (MAPE <5%)
-- 🌍 **5 economic clusters** identified for investment strategy
-- 📊 **Interactive dashboard** with 6 analysis modules
+- **89.5% accuracy** in economic classification models
+- **R²=0.999** in GDP prediction models (MAPE <5%)
+- **5 economic clusters** identified for investment strategy
+- **Interactive dashboard** with 6 analysis modules
 
 **Technologies:** Python, Prophet, Scikit-learn, Plotly, Streamlit  
 **Domain:** Economics, Finance, Forecasting
 
 ---
 
-## 🛠️ Technical Skills
+## Technical Skills
 
 ### **Core Analytics Tools**
 - **Excel Advanced** — Pivot Tables, VLOOKUP, XLOOKUP, complex formulas, financial modeling
@@ -60,15 +60,15 @@ Comprehensive analysis of 195+ countries' economic performance (2020-2025) with 
 - **Statistical Modeling** — Regression analysis, hypothesis testing
 - **Data Visualization** — Plotly, matplotlib, interactive charts
 
-## 📈 Professional Highlights
+## Professional Highlights
 
-- 🏆 **Enterprise Analytics:** Currently leading compensation forecasting and cost modeling at Concentrix Catalyst
-- 📊 **Revenue Intelligence:** Specialized in recurring revenue analysis and contract optimization at global scale  
-- ⚡ **Process Excellence:** Six Sigma Yellow Belt with proven track record in continuous improvement
-- 🎯 **Cross-Functional Leadership:** Scrum Master certified with experience managing data-driven projects
-- � **Financial Expertise:** 9+ years in banking & finance with strong foundation in business administration
+- **Enterprise Analytics:** Currently leading compensation forecasting and cost modeling at Concentrix Catalyst
+- **Revenue Intelligence:** Specialized in recurring revenue analysis and contract optimization at global scale  
+- **Process Excellence:** Six Sigma Yellow Belt with proven track record in continuous improvement
+- **Cross-Functional Leadership:** Scrum Master certified with experience managing data-driven projects
+- **Financial Expertise:** 9+ years in banking & finance with strong foundation in business administration
 
-## 🔍 Current Focus & Learning
+## Current Focus & Learning
 
 - **Advanced Python Analytics:** Expanding machine learning capabilities for business applications
 - **Economic Modeling:** Developing sophisticated forecasting models for strategic decision-making
@@ -78,7 +78,7 @@ Comprehensive analysis of 195+ countries' economic performance (2020-2025) with 
 - **ESG Analytics:** Integrating sustainability metrics into investment analysis
 - **MLOps:** Implementing model deployment and monitoring frameworks
 
-## 🎓 Education & Certifications
+## Education & Certifications
 
 **Academic Background:**
 - **Master's in Project Management** — LEAD University (2024)
@@ -92,38 +92,38 @@ Comprehensive analysis of 195+ countries' economic performance (2020-2025) with 
 - **CAPM Certification Course** — MAPO Learning Institute (2023)
 - **Career Essentials in Data Analysis** — Microsoft and LinkedIn (2023)
 
-## 🌟 Professional Approach
+## Professional Approach
 
 **What I Bring:**
 - **Business-First Analytics** — Translating complex data into actionable business insights
-- **Cross-Platform Integration** — Expertise in Salesforce, ServiceNow, Oracle, and modern BI tools
+- **Cross-Platform Integration** — Expertise in Salesforce, ServiceNow, and modern BI tools
 - **Financial Domain Knowledge** — Deep understanding of banking, finance, and compensation modeling
 - **Agile Leadership** — Certified Scrum Master with proven project delivery track record
 
-## 📬 Connect With Me
+## Connect With Me
 
 Open to discussing data analytics opportunities, project collaborations, and sharing insights about business intelligence and financial modeling.
 
 **Contact:**
-- 📧 **Email:** [kevinvargas00@gmail.com](mailto:kevinvargas00@gmail.com)
-- 💼 **LinkedIn:** [Kevin Vargas](https://linkedin.com/in/kevargas)
-- 🐱 **GitHub:** [@KevinVargas77](https://github.com/KevinVargas77)
-- 📊 **Portfolio:** [View Projects →](https://github.com/KevinVargas77/Data-Portfolio)
+- **Email:** [kevinvargas00@gmail.com](mailto:kevinvargas00@gmail.com)
+- **LinkedIn:** [Kevin Vargas](https://linkedin.com/in/kevargas)
+- **GitHub:** [@KevinVargas77](https://github.com/KevinVargas77)
+- **Portfolio:** [View Projects →](https://github.com/KevinVargas77/Data-Portfolio)
 
 **Response Time:** I typically respond to professional inquiries within 24 hours.
 
 ---
 
-## 🎯 Project Portfolio
+## Project Portfolio
 
 ### Current Projects
 
 | Project | Domain | Technologies | Status |
 |---------|---------|-------------|---------|
-| [GDP Economic Analysis](./gdp_world_economic_analysis/) | Economics/Finance | Python, Prophet, ML | ✅ Complete |
+| [GDP Economic Analysis](./gdp_world_economic_analysis/) | Economics/Finance | Python, Prophet, ML | Complete |
 
 
-### 📁 Repository Structure
+### Repository Structure
 
 ```
 Data-Portfolio/
@@ -131,9 +131,6 @@ Data-Portfolio/
 │   ├── src/                         # Analysis modules
 │   ├── outputs/                     # Visualizations & results
 │   └── README.md                    # Project documentation
-├── shared_resources/                # Common utilities & templates
-│   ├── templates/                   # Analysis templates
-│   └── utils/                       # Utility functions
 ├── .gitignore                       # Git ignore rules
 └── README.md                        # This portfolio overview
 ```
@@ -142,7 +139,7 @@ Data-Portfolio/
 
 <div align="center">
 
-### 🌟 "Data is the new oil, but analytics is the refinery" 
+### "Data is the new oil, but analytics is the refinery" 
 
 **Transforming raw data into strategic business value**
 
