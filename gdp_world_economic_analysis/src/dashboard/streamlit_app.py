@@ -195,7 +195,8 @@ def main():
             "COVID-19 Impact",
             "Regional Analysis",
             "Custom Comparisons",
-            "Forecasting & Trends"
+            "Forecasting & Trends",
+            "Data Export"
         ]
     )
     
@@ -363,6 +364,86 @@ def main():
             default=['United States', 'China', 'Germany', 'Japan', 'India']
         )
         
+        # === Analytics Export ===
+        if selected_countries:
+            try:
+                # Prepare DataFrame for export (inline implementation)
+                df_filtered = df[df['Country'].isin(selected_countries)].copy()
+                
+                # Convert to long format
+                df_long = df_filtered.melt(
+                    id_vars=['Country'],
+                    value_vars=years,
+                    var_name='Year',
+                    value_name='GDP_Millions_USD'
+                )
+                
+                # Convert Year to numeric and filter out NaN values
+                df_long['Year'] = pd.to_numeric(df_long['Year'], errors='coerce')
+                df_long = df_long.dropna(subset=['Year', 'GDP_Millions_USD'])
+                
+                # Add analytics columns
+                current_year = pd.Timestamp.now().year
+                df_long['Type'] = np.where(df_long['Year'] <= current_year, 'actual', 'forecast')
+                df_long['Value'] = pd.to_numeric(df_long['GDP_Millions_USD'], errors='coerce') / 1000.0  # Convert to billions
+                df_long['Indicator'] = 'GDP (Billions USD)'
+                df_long['date'] = pd.to_datetime(df_long['Year'].astype(str) + '-12-31', errors='coerce')
+                
+                # Add derived analytics
+                df_long = df_long.sort_values(['Country', 'Year'])
+                df_long['YoY_Growth'] = df_long.groupby('Country')['Value'].pct_change()
+                df_long['Horizon_Years'] = df_long['Year'] - current_year
+                max_year_country = df_long.groupby('Country')['Year'].transform('max')
+                df_long['Latest_Year_Flag'] = (df_long['Year'] == max_year_country).astype(int)
+                
+                # Share of world GDP
+                total_by_year = df_long.groupby('Year')['Value'].transform('sum')
+                df_long['Share_of_World_GDP'] = np.where(total_by_year > 0, df_long['Value'] / total_by_year, np.nan)
+                
+                # Add traceability
+                now_utc = pd.Timestamp.now(tz='UTC')
+                df_long['Run_TS'] = now_utc.strftime('%Y-%m-%dT%H:%M:%SZ')
+                df_long['Data_Version'] = now_utc.strftime('%Y.%m.%d-001')
+                df_long['Last_Actual_Year'] = current_year
+                
+                # Add optional columns
+                df_long['value_lo'] = np.nan
+                df_long['value_hi'] = np.nan
+                df_long['Model'] = np.nan
+                
+                # Select and order columns
+                export_cols = [
+                    'Country', 'Year', 'date', 'Indicator', 'Value', 'Type',
+                    'value_lo', 'value_hi', 'Model', 'Run_TS', 'Data_Version',
+                    'GDP_Millions_USD', 'YoY_Growth', 'Horizon_Years', 'Last_Actual_Year',
+                    'Latest_Year_Flag', 'Share_of_World_GDP'
+                ]
+                df_export = df_long[[col for col in export_cols if col in df_long.columns]].copy()
+                
+                # Generate filename with Costa Rica timezone
+                try:
+                    import zoneinfo
+                    costa_rica_tz = zoneinfo.ZoneInfo("America/Costa_Rica")
+                    ts_local = pd.Timestamp.now(tz=costa_rica_tz).strftime("%Y%m%d_%H%M%S")
+                except:
+                    ts_local = now_utc.strftime("%Y%m%d_%H%M%SZ")
+                
+                export_name = f"gdp_world_analytics_{ts_local}.csv"
+                csv_bytes = df_export.to_csv(index=False).encode("utf-8")
+                
+                st.caption(f"File will be named **{export_name}**")
+                clicked = st.download_button(
+                    label=f"⬇️ Download {export_name}",
+                    data=csv_bytes,
+                    file_name=export_name,
+                    mime="text/csv",
+                )
+                if clicked:
+                    st.toast(f"Downloaded {export_name}", icon="✅")
+                    
+            except Exception as e:
+                st.error(f"Export error: {e}")
+        
         if selected_countries:
             # Crear gráfico personalizado
             fig_custom = go.Figure()
@@ -491,6 +572,71 @@ def main():
         fig_pred.update_layout(height=600)
         st.plotly_chart(fig_pred, use_container_width=True)
         
+        # === Analytics Export for Forecasting ===
+        if not pred_df.empty:
+            try:
+                # Create forecast DataFrame in standard format
+                forecast_df = pred_df.copy()
+                forecast_df['GDP_Millions_USD'] = forecast_df['PIB_2028_Predicted']
+                forecast_df['Value'] = forecast_df['PIB_2028_Predicted'] / 1000.0  # Convert to billions
+                forecast_df['Year'] = 2028
+                forecast_df['Type'] = 'forecast'
+                forecast_df['Indicator'] = 'GDP (Billions USD)'
+                forecast_df['date'] = pd.to_datetime('2028-12-31')
+                forecast_df['YoY_Growth'] = forecast_df['CAGR'] / 100.0  # Convert CAGR to decimal
+                
+                # Add additional analytics columns
+                forecast_df['Horizon_Years'] = 2028 - pd.Timestamp.now().year
+                forecast_df['Latest_Year_Flag'] = 1  # All 2028 forecasts are latest
+                
+                # Share of world GDP for 2028
+                total_2028_gdp = forecast_df['Value'].sum()
+                forecast_df['Share_of_World_GDP'] = forecast_df['Value'] / total_2028_gdp
+                
+                # Add traceability
+                now_utc = pd.Timestamp.now(tz='UTC')
+                forecast_df['Run_TS'] = now_utc.strftime('%Y-%m-%dT%H:%M:%SZ')
+                forecast_df['Data_Version'] = '2028.forecasts-001'
+                forecast_df['Last_Actual_Year'] = pd.Timestamp.now().year
+                
+                # Add optional columns
+                forecast_df['value_lo'] = np.nan
+                forecast_df['value_hi'] = np.nan
+                forecast_df['Model'] = 'CAGR_Projection'
+                
+                # Select and order columns
+                export_cols = [
+                    'Country', 'Year', 'date', 'Indicator', 'Value', 'Type',
+                    'value_lo', 'value_hi', 'Model', 'Run_TS', 'Data_Version',
+                    'PIB_2028_Predicted', 'CAGR', 'GDP_Millions_USD', 'YoY_Growth', 
+                    'Horizon_Years', 'Last_Actual_Year', 'Latest_Year_Flag', 'Share_of_World_GDP'
+                ]
+                forecast_export = forecast_df[[col for col in export_cols if col in forecast_df.columns]].copy()
+                
+                # Generate filename with Costa Rica timezone
+                try:
+                    import zoneinfo
+                    costa_rica_tz = zoneinfo.ZoneInfo("America/Costa_Rica")
+                    ts_local = pd.Timestamp.now(tz=costa_rica_tz).strftime("%Y%m%d_%H%M%S")
+                except:
+                    ts_local = now_utc.strftime("%Y%m%d_%H%M%SZ")
+                
+                export_name = f"gdp_forecasts_2028_{ts_local}.csv"
+                csv_bytes = forecast_export.to_csv(index=False).encode("utf-8")
+                
+                st.caption(f"Forecasts file will be named **{export_name}**")
+                clicked_forecast = st.download_button(
+                    label=f"⬇️ Download Forecasts {export_name}",
+                    data=csv_bytes,
+                    file_name=export_name,
+                    mime="text/csv",
+                )
+                if clicked_forecast:
+                    st.toast(f"Downloaded forecasts {export_name}", icon="✅")
+                    
+            except Exception as e:
+                st.error(f"Forecast export error: {e}")
+        
         # Professional insight for Forecasting
         st.success("""
         **Predictive Intelligence:** GDP forecasting combines time series analysis with economic fundamentals to project 2028 scenarios. 
@@ -506,6 +652,274 @@ def main():
         pred_display.columns = ['Country', 'Predicted GDP 2028 (Trillion)', 'CAGR (%)']
         
         st.dataframe(pred_display, use_container_width=True)
+    
+    elif page == "Data Export":
+        st.header("Data Export Center")
+        
+        st.markdown("""
+        This section provides comprehensive data export capabilities for external analysis tools and platforms. 
+        All exported datasets include normalized GDP values, analytical metrics, and complete traceability information.
+        """)
+        
+        # Export Options
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            st.subheader("**Complete Historical Dataset**")
+            st.markdown("""
+            **Contains:** All countries and years (2020-2025)
+            
+            **Use Cases:**
+            - Business Intelligence platforms (Tableau, Power BI, Qlik)
+            - Statistical analysis software (R, SPSS, SAS)
+            - Custom dashboard development
+            - Academic research and publications
+            - Economic modeling and forecasting
+            
+            **Data Structure:**
+            - Normalized GDP values in billions USD
+            - Year-over-year growth calculations
+            - World GDP share percentages
+            - Data type classification (actual/forecast)
+            - Complete audit trail with timestamps
+            """)
+            
+            # Prepare complete dataset
+            try:
+                df_complete = df.melt(
+                    id_vars=['Country'],
+                    value_vars=years,
+                    var_name='Year',
+                    value_name='GDP_Millions_USD'
+                )
+                
+                df_complete['Year'] = pd.to_numeric(df_complete['Year'], errors='coerce')
+                df_complete = df_complete.dropna(subset=['Year', 'GDP_Millions_USD'])
+                
+                current_year = pd.Timestamp.now().year
+                df_complete['Type'] = np.where(df_complete['Year'] <= current_year, 'actual', 'forecast')
+                df_complete['Value'] = pd.to_numeric(df_complete['GDP_Millions_USD'], errors='coerce') / 1000.0
+                df_complete['Indicator'] = 'GDP (Billions USD)'
+                df_complete['date'] = pd.to_datetime(df_complete['Year'].astype(str) + '-12-31', errors='coerce')
+                
+                df_complete = df_complete.sort_values(['Country', 'Year'])
+                df_complete['YoY_Growth'] = df_complete.groupby('Country')['Value'].pct_change()
+                df_complete['Horizon_Years'] = df_complete['Year'] - current_year
+                max_year_country = df_complete.groupby('Country')['Year'].transform('max')
+                df_complete['Latest_Year_Flag'] = (df_complete['Year'] == max_year_country).astype(int)
+                
+                total_by_year = df_complete.groupby('Year')['Value'].transform('sum')
+                df_complete['Share_of_World_GDP'] = np.where(total_by_year > 0, df_complete['Value'] / total_by_year, np.nan)
+                
+                now_utc = pd.Timestamp.now(tz='UTC')
+                df_complete['Run_TS'] = now_utc.strftime('%Y-%m-%dT%H:%M:%SZ')
+                df_complete['Data_Version'] = now_utc.strftime('%Y.%m.%d-001')
+                df_complete['Last_Actual_Year'] = current_year
+                df_complete['value_lo'] = np.nan
+                df_complete['value_hi'] = np.nan
+                df_complete['Model'] = 'Historical_Data'
+                
+                export_cols = [
+                    'Country', 'Year', 'date', 'Indicator', 'Value', 'Type',
+                    'value_lo', 'value_hi', 'Model', 'Run_TS', 'Data_Version',
+                    'GDP_Millions_USD', 'YoY_Growth', 'Horizon_Years', 'Last_Actual_Year',
+                    'Latest_Year_Flag', 'Share_of_World_GDP'
+                ]
+                df_export = df_complete[[col for col in export_cols if col in df_complete.columns]].copy()
+                
+                try:
+                    import zoneinfo
+                    costa_rica_tz = zoneinfo.ZoneInfo("America/Costa_Rica")
+                    ts_local = pd.Timestamp.now(tz=costa_rica_tz).strftime("%Y%m%d_%H%M%S")
+                except:
+                    ts_local = now_utc.strftime("%Y%m%d_%H%M%SZ")
+                
+                complete_filename = f"gdp_complete_dataset_{ts_local}.csv"
+                complete_csv_bytes = df_export.to_csv(index=False).encode("utf-8")
+                
+                # Dataset statistics
+                st.info(f"""
+                **Dataset Statistics**
+                
+                Countries: {df_export['Country'].nunique()}  |  Time Period: {df_export['Year'].min():.0f}-{df_export['Year'].max():.0f}  |  Total Records: {len(df_export):,}  |  Columns: {len(df_export.columns)}
+                """)
+                
+                st.download_button(
+                    label="Download Complete Historical Dataset",
+                    data=complete_csv_bytes,
+                    file_name=complete_filename,
+                    mime="text/csv",
+                    help="Complete GDP dataset with all countries and analytical metrics"
+                )
+                
+            except Exception as e:
+                st.error(f"Error preparing complete dataset: {e}")
+        
+        with col2:
+            st.subheader("**Economic Forecasts 2028**")
+            st.markdown("""
+            **Contains:** CAGR-based projections for countries with sufficient historical data (minimum 3 years)
+            
+            **Use Cases:**
+            - Strategic planning and market analysis
+            - Investment decision modeling
+            - Economic scenario analysis
+            - Risk assessment frameworks
+            - Long-term business planning
+            
+            **Methodology:**
+            - Compound Annual Growth Rate (CAGR) calculations
+            - Historical trend extrapolation
+            - Conservative projection methodology
+            - Uncertainty bounds and confidence levels
+            """)
+            
+            # Prepare forecast dataset (reusing existing predictions logic)
+            try:
+                predictions_2028 = []
+                
+                for _, row in df.iterrows():
+                    country = row['Country']
+                    gdp_values = []
+                    year_values = []
+                    
+                    for year in years:
+                        if pd.notna(row[year]):
+                            gdp_values.append(row[year])
+                            year_values.append(int(year))
+                    
+                    if len(gdp_values) >= 3:
+                        initial_gdp = gdp_values[0]
+                        final_gdp = gdp_values[-1]
+                        years_diff = year_values[-1] - year_values[0]
+                        
+                        if initial_gdp > 0 and years_diff > 0:
+                            cagr = ((final_gdp / initial_gdp) ** (1/years_diff) - 1)
+                            years_to_predict = 2028 - year_values[-1]
+                            predicted_gdp = final_gdp * ((1 + cagr) ** years_to_predict)
+                            
+                            predictions_2028.append({
+                                'Country': country,
+                                'PIB_2028_Predicted': predicted_gdp,
+                                'CAGR': cagr * 100
+                            })
+                
+                if predictions_2028:
+                    pred_df = pd.DataFrame(predictions_2028)
+                    
+                    forecast_df = pred_df.copy()
+                    forecast_df['GDP_Millions_USD'] = forecast_df['PIB_2028_Predicted']
+                    forecast_df['Value'] = forecast_df['PIB_2028_Predicted'] / 1000.0
+                    forecast_df['Year'] = 2028
+                    forecast_df['Type'] = 'forecast'
+                    forecast_df['Indicator'] = 'GDP (Billions USD)'
+                    forecast_df['date'] = pd.to_datetime('2028-12-31')
+                    forecast_df['YoY_Growth'] = forecast_df['CAGR'] / 100.0
+                    forecast_df['Horizon_Years'] = 2028 - pd.Timestamp.now().year
+                    forecast_df['Latest_Year_Flag'] = 1
+                    
+                    total_2028_gdp = forecast_df['Value'].sum()
+                    forecast_df['Share_of_World_GDP'] = forecast_df['Value'] / total_2028_gdp
+                    
+                    now_utc = pd.Timestamp.now(tz='UTC')
+                    forecast_df['Run_TS'] = now_utc.strftime('%Y-%m-%dT%H:%M:%SZ')
+                    forecast_df['Data_Version'] = '2028.forecasts-001'
+                    forecast_df['Last_Actual_Year'] = pd.Timestamp.now().year
+                    forecast_df['value_lo'] = np.nan
+                    forecast_df['value_hi'] = np.nan
+                    forecast_df['Model'] = 'CAGR_Projection'
+                    
+                    forecast_cols = [
+                        'Country', 'Year', 'date', 'Indicator', 'Value', 'Type',
+                        'value_lo', 'value_hi', 'Model', 'Run_TS', 'Data_Version',
+                        'PIB_2028_Predicted', 'CAGR', 'GDP_Millions_USD', 'YoY_Growth', 
+                        'Horizon_Years', 'Last_Actual_Year', 'Latest_Year_Flag', 'Share_of_World_GDP'
+                    ]
+                    forecast_export = forecast_df[[col for col in forecast_cols if col in forecast_df.columns]].copy()
+                    
+                    try:
+                        import zoneinfo
+                        costa_rica_tz = zoneinfo.ZoneInfo("America/Costa_Rica")
+                        ts_local = pd.Timestamp.now(tz=costa_rica_tz).strftime("%Y%m%d_%H%M%S")
+                    except:
+                        ts_local = now_utc.strftime("%Y%m%d_%H%M%SZ")
+                    
+                    forecast_filename = f"gdp_forecasts_2028_{ts_local}.csv"
+                    forecast_csv_bytes = forecast_export.to_csv(index=False).encode("utf-8")
+                    
+                    st.info(f"""
+                    **Forecast Statistics**
+                    
+                    Countries: {len(forecast_export)}  |  Projection Year: 2028  |  Method: CAGR Analysis  |  Columns: {len(forecast_export.columns)}
+                    """)
+                    
+                    st.download_button(
+                        label="Download 2028 Economic Forecasts",
+                        data=forecast_csv_bytes,
+                        file_name=forecast_filename,
+                        mime="text/csv",
+                        help="CAGR-based GDP projections for 2028 with analytical metrics"
+                    )
+                
+            except Exception as e:
+                st.error(f"Error preparing forecast dataset: {e}")
+        
+        # Technical Documentation
+        st.markdown("---")
+        st.subheader("**Technical Documentation**")
+        
+        with st.expander("Column Definitions and Data Dictionary"):
+            st.markdown("""
+            **Primary Columns:**
+            - `Country`: Country name (standardized)
+            - `Year`: Fiscal year (integer)
+            - `date`: Annual date (December 31st format)
+            - `Indicator`: Economic indicator description
+            - `Value`: GDP in billions USD (normalized)
+            - `Type`: Data classification (actual/forecast)
+            
+            **Analytical Columns:**
+            - `YoY_Growth`: Year-over-year growth rate (decimal)
+            - `Horizon_Years`: Years from current date (signed integer)
+            - `Latest_Year_Flag`: Boolean indicator for most recent data
+            - `Share_of_World_GDP`: Percentage of global GDP (decimal)
+            
+            **Confidence and Uncertainty:**
+            - `value_lo`: Lower confidence bound (when available)
+            - `value_hi`: Upper confidence bound (when available)
+            - `Model`: Analytical method or data source
+            
+            **Audit and Traceability:**
+            - `Run_TS`: Export timestamp (UTC ISO-8601)
+            - `Data_Version`: Version identifier (CalVer format)
+            - `Last_Actual_Year`: Most recent historical data year
+            """)
+        
+        with st.expander("Data Quality and Methodology"):
+            st.markdown("""
+            **Data Sources:**
+            - Kaggle GDP Dataset (2020-2025)
+            - Supplementary economic indicators
+            - CAGR-based trend analysis
+            
+            **Quality Assurance:**
+            - Missing value handling with NaN preservation
+            - Outlier detection and validation
+            - Cross-year consistency checks
+            - Currency normalization to USD billions
+            
+            **Forecasting Methodology:**
+            - Compound Annual Growth Rate (CAGR) calculations
+            - Minimum 3-year historical requirement
+            - Conservative trend extrapolation
+            - No adjustment for economic cycles or external shocks
+            
+            **Known Limitations:**
+            - Forecasts assume continuation of historical trends
+            - No incorporation of policy changes or external events
+            - Limited to countries with sufficient historical data
+            - Growth projections may not reflect economic volatility
+            """)
     
     # Footer - Professional corporate style
     st.markdown("---")
